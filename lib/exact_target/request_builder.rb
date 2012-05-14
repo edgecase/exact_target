@@ -421,11 +421,14 @@ module ExactTarget
 
     def build_ts_subscriber(triggered_send, channel_member_id, email_address, options ={})
       triggered_send.Subscribers('xmlns' => 'http://exacttarget.com/wsdl/partnerAPI') do |sub|
-        sub.Owner do |owner|
-          owner.Client do |client|
-            client.ID channel_member_id
+        if channel_member_id
+          sub.Owner do |owner|
+            owner.Client do |client|
+              client.ID channel_member_id
+            end
           end
         end
+
         sub.SubscriberKey email_address
         sub.EmailAddress email_address
         options.each do |key, value|
