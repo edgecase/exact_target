@@ -132,7 +132,7 @@ module ExactTarget
       build(:subscriber, action, :listid, list_id, :search_value2 => orig_email) do |sub|
         sub.values do |vs|
           subscriber.each do |k, v|
-            unless v.nil? || k.to_s =~ /status/i
+            unless v.nil? || k.to_s =~ /^status$/i
               vs.tag!(k.to_s, v)
             end
           end
